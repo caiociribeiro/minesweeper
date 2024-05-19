@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poetsen One';
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  background: #f1f2f3;
+}
+
+.board {
+  margin-top: 20px;
+  display: grid;
+  width: 496px;
+  height: 496px;
+  background: white;
+  grid-template-columns: repeat(16, 1fr);
+}
+
+.tile {
+  background: #f1f2f9;
+  width: 30px;
+  height: 30px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  outline: 1px solid #9d9ea1;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+}
+
+.hud {
+  display: flex;
+  flex-direction: row;
+}
+
+.reset {
+  width: 5rem;
+  height: 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: rgb(184, 211, 220);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  margin-left: 2rem;
+}
+
+.reset:hover {
+  background-color: rgb(139, 178, 190);
+  cursor: pointer;
+}
+
+.reset:active {
+  transform: scale(0.98);
+}
+
+.tile:hover {
+  background: #c9cbce;
+  cursor: pointer;
+}
+
+.n0[displayed='true'] {
+  background: #dbdfe7;
+}
+
+.n1[displayed='true'] {
+  color: blue;
+}
+
+.n2[displayed='true'] {
+  color: green;
+}
+
+.n3[displayed='true'] {
+  color: red;
+}
+
+.n4[displayed='true'] {
+  color: darkblue;
+}
+
+.n5[displayed='true'] {
+  color: blueviolet;
+}
+
+.n6[displayed='true'] {
+  color: cadetblue;
+}
