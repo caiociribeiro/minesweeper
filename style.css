@@ -15,13 +15,31 @@
 
 body {
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   background: #f1f2f3;
+  position: relative;
+}
+
+.end-game {
+  width: 180px;
+  height: 120px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+#play--again {
+  margin-left: 0;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .hud {
@@ -39,6 +57,8 @@ body {
   height: var(--height);
   background: white;
   grid-template-columns: repeat(var(--col), 1fr);
+  z-index: 1;
+  filter: blur(0px);
 }
 
 .tile {

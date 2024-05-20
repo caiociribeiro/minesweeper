@@ -3,6 +3,8 @@ const reset = document.querySelector('.reset');
 const root = document.documentElement;
 const dificulty = document.querySelectorAll('option');
 const select = document.querySelector('select');
+const endGame = document.querySelector('.end-game');
+const playAgain = document.getElementById('play--again');
 let rows = 14;
 let cols = 18;
 let bombs = 40;
@@ -283,36 +285,61 @@ function handleFirstClick(tile) {
   stopWatch();
 }
 
-function handleClick(tile) {
+function showBombs() {
   let delay = 100;
+  for (let i = 0; i < tiles.length; i++) {
+    for (let j = 0; j < tiles[i].length; j++) {
+      tiles[i][j].tile.disabled = true;
+    }
+  }
+  // alert('game over');
+  for (let i = 0; i < tiles.length; i++) {
+    for (let j = 0; j < tiles[i].length; j++) {
+      setTimeout(() => {
+        if (tiles[i][j].bomb) {
+          if (tiles[i][j].tile.firstChild) tiles[i][j].tile.firstChild.remove();
+          const img = new Image();
+          img.src = './images/bomb.png';
+          tiles[i][j].tile.appendChild(img);
+        }
+      }, delay);
+      delay += 5;
+    }
+  }
+  return delay;
+}
+
+function handleClick(tile) {
   if (tile.bomb) {
     timer = false;
-    for (let i = 0; i < tiles.length; i++) {
-      for (let j = 0; j < tiles[i].length; j++) {
-        tiles[i][j].tile.disabled = true;
-      }
-    }
-    // alert('game over');
-    for (let i = 0; i < tiles.length; i++) {
-      for (let j = 0; j < tiles[i].length; j++) {
-        setTimeout(() => {
-          if (tiles[i][j].bomb) {
-            if (tiles[i][j].tile.firstChild)
-              tiles[i][j].tile.firstChild.remove();
-            const img = new Image();
-            img.src = './images/bomb.png';
-            tiles[i][j].tile.appendChild(img);
-          }
-        }, delay);
-        delay += 5;
-      }
-    }
-  } else if (tile.blank) {
-    showTiles(tile.y, tile.x);
+    const delay = showBombs();
+    setTimeout(() => {
+      displayEndGameMenu(1, second, minute);
+    }, delay + 100);
   } else {
-    tile.tile.setAttribute('displayed', 'true');
-    tile.tile.innerHTML = tile.bombsAround;
-    tile.tile.disabled = true;
+    if (tile.blank) {
+      showTiles(tile.y, tile.x);
+    } else {
+      tile.tile.setAttribute('displayed', 'true');
+      tile.tile.innerHTML = tile.bombsAround;
+      tile.tile.disabled = true;
+    }
+
+    let gameOver = true;
+    for (let i = 0; i < tiles.length; i++) {
+      for (let j = 0; j < tiles[i].length; j++) {
+        if (!tiles[i][j].bomb) {
+          if (!tiles[i][j].tile.disabled) {
+            gameOver = false;
+          }
+        }
+      }
+    }
+    if (gameOver) {
+      displayEndGameMenu(0, second, minute);
+      showBombs();
+      timer = false;
+    }
   }
 }
 
@@ -326,12 +353,48 @@ function handleFlagClick(tile) {
   }
 }
 
+function hideEndGameMenu() {
+  endGame.style.zIndex = '0';
+  grid.style.filter = 'blur(0px)';
+  playAgain.disabled = true;
+}
+
+function displayEndGameMenu(result, sec, min) {
+  let minString = min;
+  let secString = sec;
+
+  if (minute < 10) {
+    minString = `0${minString}`;
+  }
+
+  if (second < 10) {
+    secString = `0${secString}`;
+  }
+  const time = `Time: ${minString}:${secString}`;
+
+  const endTime = document.getElementById('end--time');
+  const resultDisplay = document.getElementById('result--display');
+
+  resultDisplay.innerHTML = result === 0 ? 'YOU WON' : 'GAME OVER';
+
+  endTime.innerHTML = time;
+  endGame.style.zIndex = '1';
+  grid.style.filter = 'blur(2px)';
+  playAgain.disabled = false;
+}
+
 reset.addEventListener('click', (e) => {
   resetBoard();
 });
 
 select.addEventListener('change', (e) => {
   resetBoard();
+  hideEndGameMenu();
+});
+
+playAgain.addEventListener('click', (e) => {
+  resetBoard();
+  hideEndGameMenu();
 });
 
 loadBoard();
