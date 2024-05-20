@@ -385,6 +385,7 @@ function displayEndGameMenu(result, sec, min) {
 
 reset.addEventListener('click', (e) => {
   resetBoard();
+  hideEndGameMenu();
 });
 
 select.addEventListener('change', (e) => {
