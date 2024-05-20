@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&display=swap');
 
+:root {
+  --col: 16;
+  --width: 496;
+  --height: 496;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -8,8 +14,8 @@
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -18,13 +24,21 @@ body {
   background: #f1f2f3;
 }
 
+.hud {
+  width: var(--width);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
 .board {
   margin-top: 20px;
   display: grid;
-  width: 496px;
-  height: 496px;
+  width: var(--width);
+  height: var(--height);
   background: white;
-  grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(var(--col), 1fr);
 }
 
 .tile {
@@ -42,9 +56,16 @@ body {
   align-items: center;
 }
 
-.hud {
-  display: flex;
-  flex-direction: row;
+select {
+  width: 7rem;
+  height: 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: rgb(184, 211, 220);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  margin-right: 2.2rem;
 }
 
 .reset {
@@ -59,7 +80,8 @@ body {
   margin-left: 2rem;
 }
 
-.reset:hover {
+.reset:hover,
+select:hover {
   background-color: rgb(139, 178, 190);
   cursor: pointer;
 }

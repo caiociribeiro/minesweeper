@@ -7,11 +7,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="hud">
-    <div class="timer" id="min">00:</div>
-    <div class="timer" id="sec">00</div>
-    <button class="reset">Reset</button>
-  </div>
+    <div class="hud">
+      <select>
+        <option value="easy">Easy</option>
+        <option value="intermediate" selected>Intermediate</option>
+        <option value="hard">Hard</option>
+      </select>
+      <div class="timer" id="min">00:</div>
+      <div class="timer" id="sec">00</div>
+      <button class="reset">Reset</button>
+    </div>
     <div class="board"></div>
 
   <script src="script.js"></script>

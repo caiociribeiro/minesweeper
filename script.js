@@ -1,8 +1,11 @@
 const grid = document.querySelector('.board');
 const reset = document.querySelector('.reset');
-const rows = 16;
-const cols = 16;
-const bombs = 40;
+const root = document.documentElement;
+const dificulty = document.querySelectorAll('option');
+const select = document.querySelector('select');
+let rows = 14;
+let cols = 18;
+let bombs = 40;
 let clickFlag = true;
 let checkedTiles = [];
 let tiles = drawTiles();
@@ -56,6 +59,22 @@ function getRandomInt(min, max) {
 }
 
 function drawTiles() {
+  if (dificulty[0].selected) {
+    rows = 8;
+    cols = 10;
+    bombs = 10;
+  } else if (dificulty[1].selected) {
+    rows = 14;
+    cols = 18;
+    bombs = 40;
+  } else if (dificulty[2].selected) {
+    rows = 20;
+    cols = 24;
+    bombs = 99;
+  }
+  root.style.setProperty('--col', cols);
+  root.style.setProperty('--width', cols * 31);
+  root.style.setProperty('--height', rows * 31);
   const tiles = [];
   let id = 0;
   for (let i = 0; i < rows; i++) {
@@ -122,7 +141,7 @@ function drawBoard(tile, bombs) {
     for (let i = 0; i < rows; i++) {
       if (!tiles[i][j].bomb) {
         let bombsAround = 0;
-        if (i > 0 && i < cols - 1 && j > 0 && j < rows - 1) {
+        if (i > 0 && i < rows - 1 && j > 0 && j < cols - 1) {
           if (tiles[i - 1][j - 1].bomb) bombsAround += 1;
           if (tiles[i - 1][j].bomb) bombsAround += 1;
           if (tiles[i - 1][j + 1].bomb) bombsAround += 1;
@@ -137,7 +156,7 @@ function drawBoard(tile, bombs) {
             if (j == 0) {
               if (tiles[i][j + 1].bomb) bombsAround += 1;
               if (tiles[i + 1][j + 1].bomb) bombsAround += 1;
-            } else if (j == rows - 1) {
+            } else if (j == cols - 1) {
               if (tiles[i][j - 1].bomb) bombsAround += 1;
               if (tiles[i + 1][j - 1].bomb) bombsAround += 1;
             } else {
@@ -146,12 +165,12 @@ function drawBoard(tile, bombs) {
               if (tiles[i + 1][j - 1].bomb) bombsAround += 1;
               if (tiles[i + 1][j + 1].bomb) bombsAround += 1;
             }
-          } else if (i == cols - 1) {
+          } else if (i == rows - 1) {
             if (tiles[i - 1][j].bomb) bombsAround += 1;
             if (j == 0) {
               if (tiles[i][j + 1].bomb) bombsAround += 1;
               if (tiles[i - 1][j + 1].bomb) bombsAround += 1;
-            } else if (j == rows - 1) {
+            } else if (j == cols - 1) {
               if (tiles[i][j - 1].bomb) bombsAround += 1;
               if (tiles[i - 1][j - 1].bomb) bombsAround += 1;
             } else {
@@ -167,7 +186,7 @@ function drawBoard(tile, bombs) {
               if (tiles[i + 1][j + 1].bomb) bombsAround += 1;
               if (tiles[i - 1][j].bomb) bombsAround += 1;
               if (tiles[i - 1][j + 1].bomb) bombsAround += 1;
-            } else if (j == rows - 1) {
+            } else if (j == cols - 1) {
               if (tiles[i][j - 1].bomb) bombsAround += 1;
               if (tiles[i + 1][j].bomb) bombsAround += 1;
               if (tiles[i + 1][j - 1].bomb) bombsAround += 1;
@@ -241,6 +260,18 @@ function loadBoard() {
   });
 }
 
+function resetBoard() {
+  stopStopWatch();
+  resetGrid();
+  loadBoard();
+  tiles.forEach((col) => {
+    col.forEach((tile) => {
+      tile.tile.classList.add('begin');
+    });
+  });
+  stopStopWatch();
+}
+
 function handleFirstClick(tile) {
   const x = tile.x;
   const y = tile.y;
@@ -255,7 +286,12 @@ function handleFirstClick(tile) {
 function handleClick(tile) {
   let delay = 100;
   if (tile.bomb) {
-    stopStopWatch();
+    timer = false;
+    for (let i = 0; i < tiles.length; i++) {
+      for (let j = 0; j < tiles[i].length; j++) {
+        tiles[i][j].tile.disabled = true;
+      }
+    }
     // alert('game over');
     for (let i = 0; i < tiles.length; i++) {
       for (let j = 0; j < tiles[i].length; j++) {
@@ -290,14 +326,11 @@ function handleFlagClick(tile) {
 }
 
 reset.addEventListener('click', (e) => {
-  resetGrid();
-  loadBoard();
-  tiles.forEach((col) => {
-    col.forEach((tile) => {
-      tile.tile.classList.add('begin');
-    });
-  });
-  stopStopWatch();
+  resetBoard();
+});
+
+select.addEventListener('change', (e) => {
+  resetBoard();
 });
 
 loadBoard();
