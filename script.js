@@ -312,6 +312,7 @@ function handleClick(tile) {
   } else {
     tile.tile.setAttribute('displayed', 'true');
     tile.tile.innerHTML = tile.bombsAround;
+    tile.tile.disabled = true;
   }
 }
 
@@ -334,8 +335,3 @@ select.addEventListener('change', (e) => {
 });
 
 loadBoard();
-
-// prevent first tile clicked from being a bomb
-// first tile clicked has to be a blank tile
-// make it so only blank tiles and all tiles around them are shown on first click
-// add flag right click
