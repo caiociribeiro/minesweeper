@@ -379,7 +379,7 @@ function displayEndGameMenu(result, sec, min) {
 
   endTime.innerHTML = time;
   endGame.style.zIndex = '1';
-  grid.style.filter = 'blur(2px)';
+  grid.style.filter = 'blur(5px)';
   playAgain.disabled = false;
 }
 
