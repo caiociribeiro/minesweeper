@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&display=swap");
 
 :root {
   --col: 16;
   --width: 496;
   --height: 496;
+  --transition: all 1s ease;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poetsen One';
+  font-family: "Poetsen One";
 }
 
 body {
@@ -18,11 +19,9 @@ body {
   min-height: 80vh;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   justify-content: center;
   align-items: center;
   background: #f1f2f3;
-  position: relative;
 }
 
 .end-game {
@@ -34,7 +33,10 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 0;
-  color: rgb(0, 0, 0);
+  color: #222;
+}
+.end-game-show {
+  z-index: 1;
 }
 
 #play--again {
@@ -48,7 +50,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 2rem;
 }
 
 .board {
@@ -58,8 +59,8 @@ body {
   height: var(--height);
   background: white;
   grid-template-columns: repeat(var(--col), 1fr);
-  z-index: 1;
   filter: blur(0px);
+  z-index: 1;
 }
 
 .tile {
@@ -95,10 +96,11 @@ select {
   font-size: 0.9rem;
   font-weight: 500;
   background-color: rgb(184, 211, 220);
-  color: rgb(0, 0, 0);
+  color: #222;
   border: none;
   border-radius: 5px;
   margin-left: 2rem;
+  transition: var(--transition);
 }
 
 .reset:hover,
@@ -108,7 +110,7 @@ select:hover {
 }
 
 .reset:active {
-  transform: scale(0.98);
+  transform: scale(0.5);
 }
 
 .tile:hover {
@@ -116,30 +118,30 @@ select:hover {
   cursor: pointer;
 }
 
-.n0[displayed='true'] {
+.n0[displayed="true"] {
   background: #dbdfe7;
 }
 
-.n1[displayed='true'] {
+.n1[displayed="true"] {
   color: blue;
 }
 
-.n2[displayed='true'] {
+.n2[displayed="true"] {
   color: green;
 }
 
-.n3[displayed='true'] {
+.n3[displayed="true"] {
   color: red;
 }
 
-.n4[displayed='true'] {
+.n4[displayed="true"] {
   color: darkblue;
 }
 
-.n5[displayed='true'] {
+.n5[displayed="true"] {
   color: blueviolet;
 }
 
-.n6[displayed='true'] {
+.n6[displayed="true"] {
   color: cadetblue;
 }
