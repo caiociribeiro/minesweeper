@@ -59,7 +59,7 @@ body {
   height: var(--height);
   background: white;
   grid-template-columns: repeat(var(--col), 1fr);
-  filter: blur(0px);
+  /* filter: blur(0px); */
   z-index: 1;
 }
 
@@ -71,6 +71,14 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   outline: 1px solid #9d9ea1;
+}
+
+.flag-icon {
+  color: red;
+}
+
+.bomb-icon {
+  color: #222;
 }
 
 .timer {

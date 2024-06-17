@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minesweeper</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="hud">
-      <select>
-        <option value="easy">Easy</option>
-        <option value="intermediate" selected>Intermediate</option>
-        <option value="hard">Hard</option>
-      </select>
-      <div class="timer" id="min">00:</div>
-      <div class="timer" id="sec">00</div>
-      <button class="reset">Reset</button>
-    </div>
-    <div class="board"></div>
 
-    <div class="end-game">
-      <h1 id="result--display">YOU WON!</h1>
-      <h2 id="end--time">Time: 00:00</h2>
-      <button class="reset" id="play--again" disabled>Try Again</button>
-    </div>
+<body>
+  <div class="hud">
+    <select>
+      <option value="easy">Easy</option>
+      <option value="intermediate" selected>Intermediate</option>
+      <option value="hard">Hard</option>
+    </select>
+    <div class="timer" id="min">00:</div>
+    <div class="timer" id="sec">00</div>
+    <button class="reset">Reset</button>
+  </div>
+  <div class="board"></div>
+
+  <div class="end-game">
+    <h1 id="result--display">YOU WON!</h1>
+    <h2 id="end--time">Time: 00:00</h2>
+    <button class="reset" id="play--again" disabled>Try Again</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
-</html>
 
+</html>

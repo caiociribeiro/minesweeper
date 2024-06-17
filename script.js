@@ -297,9 +297,10 @@ function showBombs() {
       setTimeout(() => {
         if (tiles[i][j].bomb) {
           if (tiles[i][j].tile.firstChild) tiles[i][j].tile.firstChild.remove();
-          const img = new Image();
-          img.src = "./images/bomb.png";
-          tiles[i][j].tile.appendChild(img);
+          const bombIcon = document.createElement("span");
+          bombIcon.classList.add("bomb-icon");
+          bombIcon.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+          tiles[i][j].tile.appendChild(bombIcon);
         }
       }, delay);
       delay += 5;
@@ -344,9 +345,10 @@ function handleClick(tile) {
 
 function handleFlagClick(tile) {
   if (!tile.tile.firstChild) {
-    const img = new Image();
-    img.src = "./images/flag.png";
-    tile.tile.appendChild(img);
+    const flagIcon = document.createElement("span");
+    flagIcon.classList.add("flag-icon");
+    flagIcon.innerHTML = `<i class="fa-regular fa-flag"></i>`;
+    tile.tile.appendChild(flagIcon);
   } else {
     tile.tile.firstChild.remove();
   }
@@ -354,7 +356,7 @@ function handleFlagClick(tile) {
 
 function hideEndGameMenu() {
   endGame.classList.remove("end-game-show");
-  grid.style.filter = "blur(0px)";
+  grid.style.filter = "blur(0)";
   playAgain.disabled = true;
 }
 
@@ -378,7 +380,7 @@ function displayEndGameMenu(result, sec, min) {
 
   endTime.innerHTML = time;
   endGame.classList.add("end-game-show");
-  grid.style.filter = "blur(5px)";
+  grid.style.filter = "blur(2px)";
   playAgain.disabled = false;
 }
 
